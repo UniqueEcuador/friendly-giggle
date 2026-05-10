@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Forward Juntos Framer Toolkit</title>
+  <link rel="stylesheet" href="assets/fj-style.css">
+  <style>
+    body { background: var(--fj-bg); }
+
+    .dash-header {
+      background: var(--fj-green-dark);
+      color: white;
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .dash-header h1 { font-size: 1.3rem; color: white; margin: 0; }
+    .dash-header p { color: rgba(255,255,255,0.7); font-size: 0.85rem; margin: 2px 0 0; }
+    .dash-header-right { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .dash-body { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+    .dash-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .dash-grid { grid-template-columns: 1fr; }
+    }
+
+    .section-head {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--fj-text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .module-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      background: var(--fj-surface);
+      border: 1px solid var(--fj-border);
+      border-radius: var(--fj-radius-sm);
+      text-decoration: none;
+      color: var(--fj-text);
+      transition: all 0.15s;
+      margin-bottom: 6px;
+    }
+    .module-row:hover { border-color: var(--fj-green); transform: translateX(3px); }
+    .module-row.done { border-color: var(--fj-green); background: var(--fj-green-light); }
+    .mod-num {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--fj-bg);
+      border: 1px solid var(--fj-border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; font-weight: 700;
+      color: var(--fj-text-muted);
+      flex-shrink: 0;
+    }
+    .module-row.done .mod-num {
+      background: var(--fj-green);
+      border-color: var(--fj-green);
+      color: white;
+    }
+    .mod-text { flex: 1; }
+    .mod-title { font-size: 0.9rem; font-weight: 600; }
+    .mod-sub { font-size: 0.75rem; color: var(--fj-text-muted); margin-top: 1px; }
+    .mod-arrow { color: var(--fj-green); font-size: 1rem; }
+
+    .side-card { margin-bottom: 1rem; }
+
+    .qlink {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 12px;
+      background: var(--fj-surface);
+      border: 1px solid var(--fj-border);
+      border-radius: var(--fj-radius-sm);
+      text-decoration: none;
+      color: var(--fj-text);
+      font-size: 0.85rem;
+      transition: all 0.15s;
+      margin-bottom: 5px;
+    }
+    .qlink:hover { border-color: var(--fj-green); color: var(--fj-green-dark); }
+    .qlink-icon { font-size: 1.1rem; flex-shrink: 0; }
+    .qlink small { font-size: 0.72rem; color: var(--fj-text-muted); display: block; }
+
+    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 1rem; }
+    .stat-box {
+      padding: 14px;
+      background: var(--fj-surface);
+      border: 1px solid var(--fj-border);
+      border-radius: var(--fj-radius-sm);
+      text-align: center;
+    }
+    .stat-num { font-size: 1.8rem; font-weight: 700; color: var(--fj-green-dark); }
+    .stat-label { font-size: 0.72rem; color: var(--fj-text-muted); margin-top: 2px; }
+
+    .note-block { background: var(--fj-surface); border: 1px solid var(--fj-border); border-radius: var(--fj-radius-sm); padding: 12px; }
+    .note-module-title { font-size: 0.78rem; font-weight: 600; color: var(--fj-text-muted); margin-bottom: 4px; }
+    .note-text { font-size: 0.82rem; color: var(--fj-text); font-style: italic; }
+    .no-note { font-size: 0.78rem; color: var(--fj-text-muted); }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="dash-header">
+  <div>
+    <h1>🧭 Forward Juntos — Framer Toolkit</h1>
+    <p>Desktop dashboard · alle modules en directe links</p>
+  </div>
+  <div class="dash-header-right">
+    <a href="https://forwardjuntos.nl" target="_blank" class="btn btn-ghost" style="color:white;border-color:rgba(255,255,255,0.4);">🇳🇱 .nl ↗</a>
+    <a href="https://forwardjuntos.eu" target="_blank" class="btn btn-ghost" style="color:white;border-color:rgba(255,255,255,0.4);">🇪🇺 .eu ↗</a>
+    <a href="https://framer.com/r/login" target="_blank" class="btn btn-outline" style="color:white;border-color:rgba(255,255,255,0.6);">⚡ Framer ↗</a>
+    <a href="index.html" class="btn btn-ghost" style="color:white;border-color:rgba(255,255,255,0.4);">📱 Mobiel</a>
+  </div>
+</div>
+
+<div class="dash-body">
+
+  <!-- Voortgang stat -->
+  <div class="stat-grid mb-lg">
+    <div class="stat-box">
+      <div class="stat-num" id="done-count">0</div>
+      <div class="stat-label">modules voltooid</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num" id="check-count">0</div>
+      <div class="stat-label">stappen afgevinkt</div>
+    </div>
+  </div>
+
+  <div class="dash-grid">
+
+    <!-- LINKS: Modules -->
+    <div>
+      <p class="section-head">Modules — klik om te openen</p>
+
+      <!-- MODULES — voeg hier nieuwe toe -->
+      <a href="modules/01-interacties.html" class="module-row" data-module="01">
+        <div class="mod-num" id="dot-01">01</div>
+        <div class="mod-text">
+          <div class="mod-title">🎯 Interacties & animaties</div>
+          <div class="mod-sub">Scroll-triggers · hover-states · Ventoux parallax</div>
+        </div>
+        <span class="mod-arrow" id="arrow-01">→</span>
+      </a>
+
+      <a href="modules/02-ai-generator.html" class="module-row" data-module="02">
+        <div class="mod-num" id="dot-02">02</div>
+        <div class="mod-text">
+          <div class="mod-title">✨ AI-pagina generator</div>
+          <div class="mod-sub">Layouts genereren · kant-en-klare prompts voor Forward Juntos</div>
+        </div>
+        <span class="mod-arrow" id="arrow-02">→</span>
+      </a>
+
+      <a href="modules/03-cms-localisatie.html" class="module-row" data-module="03">
+        <div class="mod-num" id="dot-03">03</div>
+        <div class="mod-text">
+          <div class="mod-title">🌍 CMS & localisatie</div>
+          <div class="mod-sub">NL + EU content · Auto Translate · Ventoux-updates</div>
+        </div>
+        <span class="mod-arrow" id="arrow-03">→</span>
+      </a>
+
+      <a href="modules/04-ab-testing.html" class="module-row" data-module="04">
+        <div class="mod-num" id="dot-04">04</div>
+        <div class="mod-text">
+          <div class="mod-title">🧪 A/B-testing</div>
+          <div class="mod-sub">Hero-varianten testen · CoreFlow conversie meten</div>
+        </div>
+        <span class="mod-arrow" id="arrow-04">→</span>
+      </a>
+
+      <a href="modules/05-seo-performance.html" class="module-row" data-module="05">
+        <div class="mod-num" id="dot-05">05</div>
+        <div class="mod-text">
+          <div class="mod-title">🔍 SEO & performance</div>
+          <div class="mod-sub">Lighthouse · meta-tags · Ventoux vindbaar maken</div>
+        </div>
+        <span class="mod-arrow" id="arrow-05">→</span>
+      </a>
+
+      <a href="modules/06-marketplace.html" class="module-row" data-module="06">
+        <div class="mod-num" id="dot-06">06</div>
+        <div class="mod-text">
+          <div class="mod-title">🧩 Marketplace componenten</div>
+          <div class="mod-sub">Image Slider · Flip Cards · Video Player · Plugins</div>
+        </div>
+        <span class="mod-arrow" id="arrow-06">→</span>
+      </a>
+
+      <!-- =============================================
+           NIEUWE MODULE: kopieer dit blok en vul aan:
+           ===============================================
+      <a href="modules/07-jouw-module.html" class="module-row" data-module="07">
+        <div class="mod-num" id="dot-07">07</div>
+        <div class="mod-text">
+          <div class="mod-title">🆕 Jouw module titel</div>
+          <div class="mod-sub">Korte beschrijving</div>
+        </div>
+        <span class="mod-arrow" id="arrow-07">→</span>
+      </a>
+      =============================================== -->
+
+      <!-- Notities overzicht -->
+      <div style="margin-top:1.5rem;">
+        <p class="section-head">Jouw notities</p>
+        <div class="stack" id="notes-overview">
+          <!-- wordt gevuld via JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- RECHTS: Snelle links -->
+    <div>
+
+      <div class="side-card">
+        <p class="section-head">Jouw sites</p>
+        <a href="https://forwardjuntos.nl" target="_blank" class="qlink">
+          <span class="qlink-icon">🇳🇱</span>
+          <div>forwardjuntos.nl<small>Nederlandse versie</small></div>
+        </a>
+        <a href="https://forwardjuntos.eu" target="_blank" class="qlink">
+          <span class="qlink-icon">🇪🇺</span>
+          <div>forwardjuntos.eu<small>Europese versie</small></div>
+        </a>
+        <a href="https://klimmentegenms.moves.ms/fundraisers/dominique-hermans" target="_blank" class="qlink">
+          <span class="qlink-icon">⛰️</span>
+          <div>Ventoux fundraiser<small>klimmentegenms.moves.ms</small></div>
+        </a>
+      </div>
+
+      <div class="side-card">
+        <p class="section-head">Framer</p>
+        <a href="https://framer.com/r/login" target="_blank" class="qlink">
+          <span class="qlink-icon">⚡</span>
+          <div>Framer inloggen<small>framer.com/r/login</small></div>
+        </a>
+        <a href="https://framer.com/ai" target="_blank" class="qlink">
+          <span class="qlink-icon">🤖</span>
+          <div>Framer AI<small>framer.com/ai</small></div>
+        </a>
+        <a href="https://framer.com/cms" target="_blank" class="qlink">
+          <span class="qlink-icon">🗄️</span>
+          <div>Framer CMS<small>framer.com/cms</small></div>
+        </a>
+        <a href="https://framer.com/marketplace" target="_blank" class="qlink">
+          <span class="qlink-icon">🧩</span>
+          <div>Marketplace<small>framer.com/marketplace</small></div>
+        </a>
+        <a href="https://framer.com/analytics" target="_blank" class="qlink">
+          <span class="qlink-icon">📊</span>
+          <div>Analytics & A/B<small>framer.com/analytics</small></div>
+        </a>
+        <a href="https://framer.com/seo" target="_blank" class="qlink">
+          <span class="qlink-icon">🔍</span>
+          <div>SEO-gids<small>framer.com/seo</small></div>
+        </a>
+      </div>
+
+      <div class="side-card">
+        <p class="section-head">Tools</p>
+        <a href="https://pagespeed.web.dev/" target="_blank" class="qlink">
+          <span class="qlink-icon">⚡</span>
+          <div>PageSpeed Insights<small>Test je Lighthouse-score</small></div>
+        </a>
+        <a href="https://search.google.com/search-console" target="_blank" class="qlink">
+          <span class="qlink-icon">📈</span>
+          <div>Google Search Console<small>Zoekpositie volgen</small></div>
+        </a>
+        <a href="https://www.linkedin.com/in/dominiquehhermans/" target="_blank" class="qlink">
+          <span class="qlink-icon">💼</span>
+          <div>LinkedIn<small>Dominique Hermans</small></div>
+        </a>
+      </div>
+
+      <div class="side-card">
+        <p class="section-head">Reset voortgang</p>
+        <button class="btn btn-ghost btn-full" onclick="resetAll()" style="font-size:0.82rem;">🗑️ Alle voortgang wissen</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const modules = ['01','02','03','04','05','06'];
+  const moduleTitles = {
+    '01':'🎯 Interacties','02':'✨ AI-generator','03':'🌍 CMS',
+    '04':'🧪 A/B-testing','05':'🔍 SEO','06':'🧩 Marketplace'
+  };
+
+  function updateDashboard() {
+    let done = 0;
+    let totalChecks = 0;
+
+    modules.forEach(m => {
+      const isDone = localStorage.getItem('fj-module-' + m) === 'done';
+      if (isDone) done++;
+      const row = document.querySelector('.module-row[data-module="' + m + '"]');
+      const dot = document.getElementById('dot-' + m);
+      const arrow = document.getElementById('arrow-' + m);
+      if (row && isDone) {
+        row.classList.add('done');
+        if (dot) dot.textContent = '✓';
+        if (arrow) arrow.textContent = '✓';
+      }
+
+      // Tel afgevinkte checkboxen
+      for (let key in localStorage) {
+        if (key.startsWith('fj-checks-')) {
+          try {
+            const arr = JSON.parse(localStorage.getItem(key));
+            totalChecks += arr.filter(Boolean).length;
+          } catch(e) {}
+        }
+      }
+    });
+
+    document.getElementById('done-count').textContent = done + '/' + modules.length;
+    document.getElementById('check-count').textContent = totalChecks;
+
+    // Notities
+    const container = document.getElementById('notes-overview');
+    container.innerHTML = '';
+    modules.forEach(m => {
+      const note = localStorage.getItem('fj-notes-' + m);
+      const div = document.createElement('div');
+      div.className = 'note-block';
+      div.innerHTML = '<div class="note-module-title">' + moduleTitles[m] + '</div>' +
+        (note && note.trim() ? '<div class="note-text">' + note.trim().substring(0, 120) + (note.length > 120 ? '…' : '') + '</div>'
+          : '<div class="no-note">Nog geen notities</div>');
+      container.appendChild(div);
+    });
+  }
+
+  function resetAll() {
+    if (!confirm('Weet je zeker dat je alle voortgang wilt wissen?')) return;
+    modules.forEach(m => {
+      localStorage.removeItem('fj-module-' + m);
+      localStorage.removeItem('fj-notes-' + m);
+      for (let key in localStorage) {
+        if (key.startsWith('fj-checks-')) localStorage.removeItem(key);
+      }
+    });
+    showToast('Voortgang gewist');
+    setTimeout(() => location.reload(), 800);
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2200);
+  }
+
+  updateDashboard();
+</script>
+</body>
+</html>

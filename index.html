@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="FJ Toolkit">
+  <title>Forward Juntos — Framer Toolkit</title>
+  <link rel="stylesheet" href="assets/fj-style.css">
+  <style>
+    .hero {
+      background: linear-gradient(135deg, var(--fj-green-dark) 0%, var(--fj-green) 100%);
+      color: white;
+      padding: 2rem 1.25rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 180px; height: 180px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -20px;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+    }
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.75;
+      margin-bottom: 0.5rem;
+    }
+    .hero h1 { color: white; margin-bottom: 0.5rem; }
+    .hero p  { color: rgba(255,255,255,0.8); font-size: 0.9rem; }
+
+    .module-card {
+      background: var(--fj-surface);
+      border: 1px solid var(--fj-border);
+      border-radius: var(--fj-radius);
+      padding: 1.1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: var(--fj-text);
+      box-shadow: var(--fj-shadow);
+      transition: all 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .module-card:hover, .module-card:active {
+      border-color: var(--fj-green);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(29,158,117,0.12);
+    }
+    .module-emoji {
+      font-size: 1.8rem;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--fj-bg);
+      border-radius: var(--fj-radius-sm);
+      flex-shrink: 0;
+    }
+    .module-info { flex: 1; min-width: 0; }
+    .module-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--fj-text);
+      margin-bottom: 2px;
+    }
+    .module-sub {
+      font-size: 0.78rem;
+      color: var(--fj-text-muted);
+    }
+    .module-arrow {
+      font-size: 1.1rem;
+      color: var(--fj-green);
+      flex-shrink: 0;
+    }
+    .module-card.done { border-color: var(--fj-green); }
+    .module-card.done .module-emoji {
+      background: var(--fj-green-light);
+    }
+
+    .quick-links {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .quick-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 14px 8px;
+      background: var(--fj-surface);
+      border: 1px solid var(--fj-border);
+      border-radius: var(--fj-radius-sm);
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--fj-text-muted);
+      text-align: center;
+      transition: all 0.15s;
+      box-shadow: var(--fj-shadow);
+    }
+    .quick-btn:hover { border-color: var(--fj-green); color: var(--fj-green-dark); }
+    .quick-btn-icon { font-size: 1.4rem; }
+
+    .section-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--fj-text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .progress-summary {
+      background: var(--fj-green-light);
+      border-radius: var(--fj-radius-sm);
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .progress-num {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--fj-green-dark);
+    }
+    .progress-label {
+      font-size: 0.8rem;
+      color: var(--fj-green-dark);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <div style="max-width:720px; margin:0 auto; position:relative; z-index:1;">
+    <p class="hero-eyebrow">Framer Upgrade Toolkit</p>
+    <h1>Forward Juntos</h1>
+    <p>6 modules om je sites interactiever te maken — doorloop ze stap voor stap.</p>
+  </div>
+</div>
+
+<!-- ===== VOORTGANG ===== -->
+<div class="container mt-md">
+  <div class="progress-summary" id="progress-summary">
+    <div class="progress-num" id="progress-count">0/6</div>
+    <div>
+      <div class="progress-label" style="font-weight:600;">modules voltooid</div>
+      <div class="progress-bar mt-sm" style="width:160px;">
+        <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MODULES ===== -->
+<div class="container mt-lg">
+  <p class="section-title">Stappenplan</p>
+  <div class="stack" id="module-list">
+
+    <!-- MODULE 01 -->
+    <a href="modules/01-interacties.html" class="module-card" data-module="01">
+      <div class="module-emoji">🎯</div>
+      <div class="module-info">
+        <div class="module-title">Interacties & animaties</div>
+        <div class="module-sub">Scroll-triggers · hover-states · Ventoux parallax</div>
+      </div>
+      <span class="module-arrow">→</span>
+    </a>
+
+    <!-- MODULE 02 -->
+    <a href="modules/02-ai-generator.html" class="module-card" data-module="02">
+      <div class="module-emoji">✨</div>
+      <div class="module-info">
+        <div class="module-title">AI-pagina generator</div>
+        <div class="module-sub">Layouts genereren met één prompt in Framer AI</div>
+      </div>
+      <span class="module-arrow">→</span>
+    </a>
+
+    <!-- MODULE 03 -->
+    <a href="modules/03-cms-localisatie.html" class="module-card" data-module="03">
+      <div class="module-emoji">🌍</div>
+      <div class="module-info">
+        <div class="module-title">CMS & localisatie</div>
+        <div class="module-sub">NL + EU content · Auto Translate · Ventoux-updates</div>
+      </div>
+      <span class="module-arrow">→</span>
+    </a>
+
+    <!-- MODULE 04 -->
+    <a href="modules/04-ab-testing.html" class="module-card" data-module="04">
+      <div class="module-emoji">🧪</div>
+      <div class="module-info">
+        <div class="module-title">A/B-testing</div>
+        <div class="module-sub">Hero-varianten testen · CoreFlow conversie meten</div>
+      </div>
+      <span class="module-arrow">→</span>
+    </a>
+
+    <!-- MODULE 05 -->
+    <a href="modules/05-seo-performance.html" class="module-card" data-module="05">
+      <div class="module-emoji">🔍</div>
+      <div class="module-info">
+        <div class="module-title">SEO & performance</div>
+        <div class="module-sub">Lighthouse · meta-tags · Ventoux vindbaar maken</div>
+      </div>
+      <span class="module-arrow">→</span>
+    </a>
+
+    <!-- MODULE 06 -->
+    <a href="modules/06-marketplace.html" class="module-card" data-module="06">
+      <div class="module-emoji">🧩</div>
+      <div class="module-info">
+        <div class="module-title">Marketplace componenten</div>
+        <div class="module-sub">Image Slider · Flip Cards · Video Player</div>
+      </div>
+      <span class="module-arrow">→</span>
+    </a>
+
+    <!-- ===================================================
+         NIEUWE MODULE TOEVOEGEN — kopieer dit blok:
+         =====================================================
+    <a href="modules/07-jouw-module.html" class="module-card" data-module="07">
+      <div class="module-emoji">🆕</div>
+      <div class="module-info">
+        <div class="module-title">Jouw module titel</div>
+        <div class="module-sub">Korte beschrijving</div>
+      </div>
+      <span class="module-arrow">→</span>
+    </a>
+    ===================================================== -->
+
+  </div>
+</div>
+
+<!-- ===== SNELLE LINKS ===== -->
+<div class="container mt-xl">
+  <p class="section-title">Direct openen</p>
+  <div class="quick-links">
+    <a href="https://forwardjuntos.nl" target="_blank" class="quick-btn">
+      <span class="quick-btn-icon">🇳🇱</span>
+      forwardjuntos.nl
+    </a>
+    <a href="https://forwardjuntos.eu" target="_blank" class="quick-btn">
+      <span class="quick-btn-icon">🇪🇺</span>
+      forwardjuntos.eu
+    </a>
+    <a href="https://framer.com/r/login" target="_blank" class="quick-btn">
+      <span class="quick-btn-icon">⚡</span>
+      Framer login
+    </a>
+    <a href="https://framer.com/ai" target="_blank" class="quick-btn">
+      <span class="quick-btn-icon">🤖</span>
+      Framer AI
+    </a>
+    <a href="https://framer.com/marketplace" target="_blank" class="quick-btn">
+      <span class="quick-btn-icon">🧩</span>
+      Marketplace
+    </a>
+    <a href="dashboard.html" class="quick-btn">
+      <span class="quick-btn-icon">🖥️</span>
+      Desktop view
+    </a>
+  </div>
+</div>
+
+<!-- ===== INFO ===== -->
+<div class="container mt-lg" style="padding-bottom:3rem;">
+  <div class="info-banner">
+    <span>💡</span>
+    <div>
+      <strong>Tip:</strong> Voeg deze pagina toe aan je beginscherm (iOS: Delen → Zet op beginscherm). Dan heb je directe toegang zonder browser openen.
+    </div>
+  </div>
+</div>
+
+<script>
+  // Progress bijhouden via localStorage
+  const modules = ['01','02','03','04','05','06'];
+
+  function updateProgress() {
+    const done = modules.filter(m => localStorage.getItem('fj-module-' + m) === 'done');
+    document.getElementById('progress-count').textContent = done.length + '/' + modules.length;
+    document.getElementById('progress-fill').style.width = (done.length / modules.length * 100) + '%';
+
+    document.querySelectorAll('.module-card[data-module]').forEach(card => {
+      const mod = card.getAttribute('data-module');
+      if (localStorage.getItem('fj-module-' + mod) === 'done') {
+        card.classList.add('done');
+        card.querySelector('.module-arrow').textContent = '✓';
+        card.querySelector('.module-arrow').style.color = 'var(--fj-green)';
+      }
+    });
+  }
+
+  updateProgress();
+</script>
+</body>
+</html>

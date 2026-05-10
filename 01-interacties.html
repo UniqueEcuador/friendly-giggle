@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 01 — Interacties & animaties | Forward Juntos</title>
+  <link rel="stylesheet" href="../assets/fj-style.css">
+  <style>
+    .step-panel { display: none; }
+    .step-panel.active { display: block; }
+    .framer-link-card {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 14px;
+      background: var(--fj-surface);
+      border: 1px solid var(--fj-border);
+      border-radius: var(--fj-radius-sm);
+      text-decoration: none;
+      color: var(--fj-text);
+      font-size: 0.88rem;
+      transition: all 0.15s;
+    }
+    .framer-link-card:hover { border-color: var(--fj-green); color: var(--fj-green-dark); }
+    .framer-link-icon { font-size: 1.3rem; flex-shrink: 0; }
+    .step-counter {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--fj-text-muted);
+    }
+    .nav-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 1.5rem;
+    }
+    .nav-row .btn { flex: 1; justify-content: center; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="fj-header">
+  <div class="fj-header-inner">
+    <a href="../index.html" class="back-link">← Overzicht</a>
+    <a href="../index.html" class="fj-logo">FJ <span>Toolkit</span></a>
+    <span class="badge badge-green">Module 01</span>
+  </div>
+</div>
+
+<div class="container" style="padding-top:1.5rem; padding-bottom:3rem;">
+
+  <!-- Titel -->
+  <p class="step-counter" id="step-label">Stap 1 van 5</p>
+  <h2 style="margin-top:4px; margin-bottom:0.75rem;">🎯 Interacties & animaties</h2>
+
+  <!-- Progress -->
+  <div class="progress-bar mb-lg">
+    <div class="progress-fill" id="progress-fill" style="width:20%"></div>
+  </div>
+
+  <!-- Stap-navigatie bollen -->
+  <div class="step-indicator mb-lg" id="step-indicator">
+    <div class="step-dot active" onclick="goTo(0)">1</div>
+    <div class="step-line" id="line-0"></div>
+    <div class="step-dot" onclick="goTo(1)">2</div>
+    <div class="step-line" id="line-1"></div>
+    <div class="step-dot" onclick="goTo(2)">3</div>
+    <div class="step-line" id="line-2"></div>
+    <div class="step-dot" onclick="goTo(3)">4</div>
+    <div class="step-line" id="line-3"></div>
+    <div class="step-dot" onclick="goTo(4)">5</div>
+  </div>
+
+  <!-- ======= STAP 1 ======= -->
+  <div class="step-panel active" id="panel-0">
+    <div class="card">
+      <span class="badge badge-green mb-sm">Wat & Waarom</span>
+      <h3 style="margin-top:8px;">Scroll-gestuurde stap-flow</h3>
+      <p style="margin-top:8px;">Jouw "Van laesie naar inzicht"-sectie bestaat nu uit statische tekst. Met Framer scroll-triggers verschijnt elke stap pas als de bezoeker er klaar voor is — dit vergroot de leestijd en betrokkenheid sterk.</p>
+
+      <div class="info-banner mt-md">
+        <span>🎯</span>
+        <div>Dit is de <strong>hoogste prioriteit</strong> voor Forward Juntos — directe impact op hoe bezoekers jouw verhaal beleven.</div>
+      </div>
+    </div>
+
+    <div class="card mt-md">
+      <h3>Acties in Framer</h3>
+      <div class="stack mt-md">
+        <a href="https://framer.com/r/login" target="_blank" class="framer-link-card">
+          <span class="framer-link-icon">⚡</span>
+          <div><strong>1. Log in op Framer</strong><br><small style="color:var(--fj-text-muted)">framer.com/r/login</small></div>
+        </a>
+        <a href="https://www.framer.com/features/interactions/" target="_blank" class="framer-link-card">
+          <span class="framer-link-icon">📖</span>
+          <div><strong>2. Lees: Framer Interactions guide</strong><br><small style="color:var(--fj-text-muted)">framer.com/features/interactions</small></div>
+        </a>
+        <a href="https://www.youtube.com/results?search_query=framer+scroll+animation+tutorial" target="_blank" class="framer-link-card">
+          <span class="framer-link-icon">▶️</span>
+          <div><strong>3. Bekijk: Scroll animation tutorial</strong><br><small style="color:var(--fj-text-muted)">YouTube · "framer scroll animation tutorial"</small></div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======= STAP 2 ======= -->
+  <div class="step-panel" id="panel-1">
+    <div class="card">
+      <span class="badge badge-amber mb-sm">Checklist</span>
+      <h3 style="margin-top:8px;">Scroll-triggers instellen</h3>
+      <p style="margin-top:8px;">Vink af wat je hebt ingesteld in Framer. Tik op een item om het te markeren.</p>
+    </div>
+
+    <div class="card mt-md">
+      <ul class="checklist" id="checklist-01">
+        <li onclick="toggleCheck(this)">
+          <div class="check-icon">✓</div>
+          <span>Selecteer je "Van laesie naar inzicht" sectie in Framer</span>
+        </li>
+        <li onclick="toggleCheck(this)">
+          <div class="check-icon">✓</div>
+          <span>Voeg per stap een <em>Appear on Scroll</em> animatie toe</span>
+        </li>
+        <li onclick="toggleCheck(this)">
+          <div class="check-icon">✓</div>
+          <span>Stel delay in: stap 1 = 0s, stap 2 = 0.1s, stap 3 = 0.2s…</span>
+        </li>
+        <li onclick="toggleCheck(this)">
+          <div class="check-icon">✓</div>
+          <span>Preview op mobiel formaat (390px breedte)</span>
+        </li>
+        <li onclick="toggleCheck(this)">
+          <div class="check-icon">✓</div>
+          <span>Publiceer en test op je telefoon</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ======= STAP 3 ======= -->
+  <div class="step-panel" id="panel-2">
+    <div class="card">
+      <span class="badge badge-purple mb-sm">Hover-states</span>
+      <h3 style="margin-top:8px;">Kaarten interactief maken</h3>
+      <p style="margin-top:8px;">Jouw drie kaarten (Herstel, Inzicht, Uitdaging) kunnen bij hover een uitklapdetail tonen. Dit trekt de aandacht en verlengt de sessieduur.</p>
+    </div>
+
+    <div class="card mt-md">
+      <h3>Stap voor stap</h3>
+      <ul class="checklist mt-md" id="checklist-02">
+        <li onclick="toggleCheck(this)">
+          <div class="check-icon">✓</div>
+          <span>Selecteer een kaart → ga naar <strong>Interactions</strong> rechts</span>
+        </li>
+        <li onclick="toggleCheck(this)">
+          <div class="check-icon">✓</div>
+          <span>Voeg "While Hover" animatie toe: scale(1.02) + shadow</span>
+        </li>
+        <li onclick="toggleCheck(this)">
+          <div class="check-icon">✓</div>
+          <span>Voeg een verborgen tekst-laag toe die bij hover zichtbaar wordt</span>
+        </li>
+        <li onclick="toggleCheck(this)">
+          <div class="check-icon">✓</div>
+          <span>Doe hetzelfde voor alle drie kaarten</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ======= STAP 4 ======= -->
+  <div class="step-panel" id="panel-3">
+    <div class="card">
+      <span class="badge badge-green mb-sm">Ventoux Hero</span>
+      <h3 style="margin-top:8px;">Parallax op de Mont Ventoux afbeelding</h3>
+      <p style="margin-top:8px;">De drone-foto van de Ventoux is krachtig. Met een subtiele parallax-effect beweegt de afbeelding mee met scrollen — dat geeft diepte en een premium gevoel.</p>
+    </div>
+
+    <div class="card mt-md">
+      <ul class="checklist mt-md" id="checklist-03">
+        <li onclick="toggleCheck(this)">
+          <div class="check-icon">✓</div>
+          <span>Selecteer de Ventoux hero-afbeelding in Framer</span>
+        </li>
+        <li onclick="toggleCheck(this)">
+          <div class="check-icon">✓</div>
+          <span>Ga naar <strong>Interactions → Scroll</strong></span>
+        </li>
+        <li onclick="toggleCheck(this)">
+          <div class="check-icon">✓</div>
+          <span>Stel Y-positie in: van 0px naar -40px bij scrollen</span>
+        </li>
+        <li onclick="toggleCheck(this)">
+          <div class="check-icon">✓</div>
+          <span>Zet overflow van parent-container op "hidden"</span>
+        </li>
+        <li onclick="toggleCheck(this)">
+          <div class="check-icon">✓</div>
+          <span>Test: scroll op de pagina — de foto schuift trager mee</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ======= STAP 5 ======= -->
+  <div class="step-panel" id="panel-4">
+    <div class="card">
+      <span class="badge badge-green mb-sm">Afronden</span>
+      <h3 style="margin-top:8px;">Notities & klaar</h3>
+      <p style="margin-top:8px;">Sla op wat je hebt ingesteld. Bij problemen of vragen schrijf je ze hier neer.</p>
+    </div>
+
+    <div class="card mt-md">
+      <h3>Jouw aantekeningen</h3>
+      <textarea class="note-field mt-md" id="notes-01" placeholder="Bijv. 'scroll-trigger werkt goed, parallax nog uitzoeken…'" rows="4"></textarea>
+      <div class="row mt-md">
+        <button class="btn btn-ghost" onclick="saveNotes()">💾 Opslaan</button>
+        <a href="https://forwardjuntos.nl" target="_blank" class="btn btn-outline">Bekijk resultaat ↗</a>
+      </div>
+    </div>
+
+    <button class="btn btn-primary btn-full mt-lg" onclick="completeModule()">
+      ✓ Module 01 voltooid — terug naar overzicht
+    </button>
+  </div>
+
+  <!-- ======= NAVIGATIE ======= -->
+  <div class="nav-row">
+    <button class="btn btn-ghost" id="btn-prev" onclick="prevStep()" style="display:none;">← Terug</button>
+    <button class="btn btn-primary" id="btn-next" onclick="nextStep()">Volgende →</button>
+  </div>
+
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+  let current = 0;
+  const total = 5;
+  const MODULE_KEY = 'fj-module-01';
+  const NOTES_KEY  = 'fj-notes-01';
+
+  // Herstel notities
+  const saved = localStorage.getItem(NOTES_KEY);
+  if (saved && document.getElementById('notes-01')) {
+    document.getElementById('notes-01').value = saved;
+  }
+
+  function goTo(idx) {
+    document.querySelectorAll('.step-panel').forEach((p, i) => {
+      p.classList.toggle('active', i === idx);
+    });
+    document.querySelectorAll('.step-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === idx);
+      d.classList.toggle('done', i < idx);
+    });
+    for (let i = 0; i < total - 1; i++) {
+      const line = document.getElementById('line-' + i);
+      if (line) line.classList.toggle('done', i < idx);
+    }
+    document.getElementById('progress-fill').style.width = ((idx + 1) / total * 100) + '%';
+    document.getElementById('step-label').textContent = 'Stap ' + (idx + 1) + ' van ' + total;
+    document.getElementById('btn-prev').style.display = idx === 0 ? 'none' : 'flex';
+    document.getElementById('btn-next').style.display = idx === total - 1 ? 'none' : 'flex';
+    current = idx;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function nextStep() { if (current < total - 1) goTo(current + 1); }
+  function prevStep() { if (current > 0) goTo(current - 1); }
+
+  function toggleCheck(el) {
+    el.classList.toggle('checked');
+    saveChecks();
+  }
+
+  function saveChecks() {
+    document.querySelectorAll('[id^=checklist]').forEach(list => {
+      const states = Array.from(list.querySelectorAll('li')).map(li => li.classList.contains('checked'));
+      localStorage.setItem('fj-checks-' + list.id, JSON.stringify(states));
+    });
+  }
+
+  function loadChecks() {
+    document.querySelectorAll('[id^=checklist]').forEach(list => {
+      const saved = localStorage.getItem('fj-checks-' + list.id);
+      if (saved) {
+        JSON.parse(saved).forEach((checked, i) => {
+          const items = list.querySelectorAll('li');
+          if (items[i] && checked) items[i].classList.add('checked');
+        });
+      }
+    });
+  }
+
+  function saveNotes() {
+    const val = document.getElementById('notes-01').value;
+    localStorage.setItem(NOTES_KEY, val);
+    showToast('Notities opgeslagen ✓');
+  }
+
+  function completeModule() {
+    localStorage.setItem(MODULE_KEY, 'done');
+    showToast('Module 01 voltooid! ✓');
+    setTimeout(() => { window.location.href = '../index.html'; }, 1200);
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2200);
+  }
+
+  loadChecks();
+</script>
+</body>
+</html>
